@@ -31,6 +31,7 @@ const sidebars = {
             "javascriptThings/justJavascript/02 JavaScript Universe",
           ],
         },
+        "javascriptThings/rest-vs-spread",
       ],
     },
     {
