@@ -39,6 +39,7 @@ const sidebars = {
       label: "React",
       items: [
         "reactThings/what-is-react",
+        "reactThings/what-is-react-hook",
         {
           type: "category",
           label: "React Hooks",
