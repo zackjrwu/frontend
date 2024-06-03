@@ -1,0 +1,76 @@
+---
+sidebar_position: 1
+tags: [Javascript, React]
+---
+
+
+import React, { useState } from 'react';
+
+
+
+# What is React ?
+
+## 簡介
+
+React 是一個由 Facebook 開發和維護的開源 JavaScript 庫，用於構建用戶界面，特別是單頁應用程式（SPA）。它的主要目的是讓開發者能夠建立可重用的 UI 元件，以提高開發效率和維護性。
+
+## 核心概念
+
+1. 元件（Components）:
+- React 的核心思想是把 UI 拆分成獨立的、可重用的元件，每個元件封裝了自己的狀態和邏輯。元件可以是類型元件（class components）或 **函式元件（functional components）**。
+
+2. JSX :
+- JSX 是一種 JavaScript 語法擴展，允許在 JavaScript 中寫類似 HTML 的語法。這使得編寫和理解元件結構變得更加直觀。
+
+3. 單向數據流（One-way Data Flow）:
+- React 採用單向數據流，數據從父元件流向子元件，這有助於預測和理解數據的變化和應用狀態。
+
+4. 虛擬 DOM（Virtual DOM）:
+- React 使用虛擬 DOM 來提高應用的性能。每次狀態改變時，React 會先在虛擬 DOM 中計算出最小的變化，然後將這些變化應用到實際的 DOM 中，減少了直接操作 DOM 的成本。
+
+## 主要特性
+
+- 聲明式: 使用聲明式編程來描述 UI 的狀態，當數據改變時，React 會高效地更新和渲染適當的元件。
+
+- 組件化: UI 被劃分為獨立的元件，這些元件可以單獨開發、測試和重用。
+
+- 一次學習，隨處編寫: 一旦掌握了 React，開發者可以使用 React 來構建 Web 應用、移動應用（使用 React Native）等。
+
+## 常用工具
+
+- Create React App: 一個官方提供的工具，用於快速構建 React 應用，內置了配置好的開發環境。
+
+- React DevTools: 一個瀏覽器擴展，用於檢查和調試 React 元件樹。
+
+## 簡單範例
+
+
+```jsx
+export const Demo = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+        <h1>Hello, React!</h1>
+        <p>You clicked {count} times</p>
+        <button onClick={() => setCount(count + 1)}>
+          Click me
+        </button>
+      </div>
+  );
+}
+```
+
+export const Demo = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+        <h1>Hello, React!</h1>
+        <p>You clicked {count} times</p>
+        <button onClick={() => setCount(count + 1)}>
+          Click me
+        </button>
+      </div>
+  );
+}
+
+<Demo/>

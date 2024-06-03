@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Rest vs Spread Operator"
+tags: [Javascript]
 ---
 
 # Rest vs Spread Operator
