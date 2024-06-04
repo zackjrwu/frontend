@@ -1,0 +1,109 @@
+---
+tags: [React]
+---
+
+import React, { useState } from "react";
+
+### **創建狀態 (`useState`)**
+
+1. **基本使用**：使用 **`useState`** Hook 創建狀態，並透過創建狀態時產生的函數來更新狀態。
+   - 例子：**`const [state, setState] = useState(initialValue);`**
+2. **惰性初始化**：基於回調函數創建狀態，用於初始狀態依賴於複雜計算或異步操作（如從本地存儲讀取數據）的情況。
+   簡單來說就是當這個 component 的值是需要高花費計算出來時就可使用，這會讓 component 重新渲染後不會再度重新計算。
+   - 這個回調函數**只在組件的初始渲染時被調用**。
+   - 回調函數應是純函數，且無需參數。
+   - 例子：**`useState(() => computeInitialValue());`**
+
+### **更新狀態**
+
+1. **直接更新**：將新值直接傳遞給設定器函數以更新狀態。
+   - 例子：**`setState(1000);`**
+2. **基於當前狀態的更新**：使用回調函數更新狀態，這在需要基於當前狀態計算新狀態時特別有用。
+   - 回調函數接收當前狀態作為參數，返回新狀態。
+   - 例子：**`setState(prevState => prevState + 1);`**
+
+```jsx
+// 錯誤示範
+import React, { useState } from "react";
+export const RightCounter = () => {
+  const [count, setCount] = useState(0);
+  const handleIncrement = () => {
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  );
+};
+```
+
+export const WrongCounter = () => {
+  const [count, setCount] = useState(0);
+  const handleIncrement = () => {
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+  };
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  );
+};
+
+<WrongCounter />
+<br />
+
+```jsx
+// 正確示範
+import React, { useState } from "react";
+export const RightCounter = () => {
+  const [count, setCount] = useState(0);
+  const handleIncrement = () => {
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  );
+};
+```
+
+export const RightCounter = () => {
+  const [count, setCount] = useState(0);
+  const handleIncrement = () => {
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
+  };
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  );
+};
+
+<RightCounter />
+<br />
+
+### **注意事項**
+
+:::danger
+
+**不要直接修改狀態**：在更新對象或陣列類型的狀態時，應創建一個新的對象或陣列，並將其傳遞給設定器函數。
+
+- 這是為了避免直接修改現有狀態，這在 React 中是不被推薦的。
+
+總結來說，**`useState`** 提供了一個靈活而強大的方式來在函數組件中管理狀態。透過基本和高階的使用方法，我們可以有效地處理各種狀態更新的情況。
