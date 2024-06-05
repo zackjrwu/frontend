@@ -9,7 +9,7 @@ import React, { useState } from "react";
 1. **基本使用**：使用 **`useState`** Hook 創建狀態，並透過創建狀態時產生的函數來更新狀態。
    - 例子：**`const [state, setState] = useState(initialValue);`**
 2. **惰性初始化**：基於回調函數創建狀態，用於初始狀態依賴於複雜計算或異步操作（如從本地存儲讀取數據）的情況。
-   簡單來說就是當這個 component 的值是需要高花費計算出來時就可使用，這會讓 component 重新渲染後不會再度重新計算。
+   簡單來說就是當這個 component 的值是需要高花費計算出來時就可使用，這會讓 [component 重新渲染](../causes-of-re-rendering.mdx)後不會再度重新計算。
    - 這個回調函數**只在組件的初始渲染時被調用**。
    - 回調函數應是純函數，且無需參數。
    - 例子：**`useState(() => computeInitialValue());`**

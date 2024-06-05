@@ -40,6 +40,7 @@ const sidebars = {
       items: [
         "reactThings/what-is-react",
         "reactThings/what-is-react-hook",
+        "reactThings/causes-of-re-rendering",
         {
           type: "category",
           label: "React Hooks",

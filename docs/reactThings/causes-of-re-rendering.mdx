@@ -1,0 +1,42 @@
+---
+tags: [React]
+---
+
+# Causes of re-rendering
+
+讓 React 組件重新渲染的原因有很多，了解這些原因可以幫助優化應用性能並正確使用 React 的特性。以下是一些常見的重新渲染原因。
+
+### 狀態更新 (useState / useReducer)
+
+每當你使用 useState 或 useReducer 更新狀態時，React 會重新渲染該組件及其子組件。
+確保狀態只在需要時更新，以避免不必要的重新渲染。
+
+### Props 變化
+
+父組件的重新渲染會導致子組件接收到新的 props，從而觸發子組件的重新渲染。
+如果子組件的 props 沒有改變，應用 React.memo 來避免不必要的重新渲染。
+
+### Context 值的變化 (useContext)
+
+當 Context 的值改變時，所有使用該 Context 的組件都會重新渲染。
+減少 Context 值的頻繁變化可以減少不必要的重新渲染。
+
+### 父組件重新渲染
+
+父組件的重新渲染會導致其所有子組件重新渲染，即使子組件的 props 沒有改變。
+使用 React.memo 和 useCallback 可以減少子組件不必要的重新渲染。
+
+### 強制更新 (forceUpdate)
+
+使用 forceUpdate 可以強制組件重新渲染，但應謹慎使用，因為這會破壞 React 的狀態管理機制。
+儘量避免使用 forceUpdate，並考慮通過狀態或 props 更新來觸發重新渲染。
+
+### 鍵值改變 (Key Change)
+
+在列表渲染中，如果元素的 key 發生改變，React 會認為這是不同的元素，並會卸載舊元素並掛載新元素。
+確保使用穩定且唯一的 key，以避免不必要的重渲染。
+
+### Hook 的依賴變化 (useEffect, useMemo, useCallback)
+
+當 useEffect, useMemo, useCallback 的依賴發生變化時，這些 Hook 會重新執行，並可能導致重新渲染。
+正確設置 Hook 的依賴數組，以避免不必要的重新執行和重新渲染。
