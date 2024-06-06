@@ -1,0 +1,142 @@
+---
+tags: [React]
+---
+
+import React, { useReducer } from "react";
+
+Reducer 是一個純函數，接收當前的 state 和 action，並返回新的 state。這個模式在 React 中常用於管理複雜的 state，特別是在使用 useReducer hook 的時候。它的運作方式與 Redux 中的 reducer 相似。簡單來說是都互相啟發。
+
+## Reducer 的定義
+
+```jsx
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return { count: state.count + 1 };
+    case "DECREMENT":
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+```
+
+1. 定義一個 reducer 的函式
+2. state 參數為此 reducer 所維護的狀態（我想像成微型 db）
+3. action 為當實際需要操作某項事件（動詞）時所要對應到的名稱
+4. switch...case 為主要複雜的操作邏輯的程式碼
+5. return state 很重要，當前的 state 將在沒有匹配到任何 case 的情況下被返回，這樣可以確保 reducer 函數始終返回一個有效的 state，避免因未處理的 action 導致的錯誤。
+
+### 使用情境
+
+    - 簡單狀態管理
+
+        對於簡單的 state 管理，例如計數器，可以使用 useState。但當狀態變得複雜，例如多層嵌套或需要基於不同 action 進行更新時，useReducer 會更適合。
+
+    - 複雜狀態管理
+
+        當有多個 state 需要相互依賴或組合更新時，例如表單輸入或複雜的 UI 交互，useReducer 提供了一個更清晰、更易於管理的結構。
+
+### Hook: useReducer
+
+    ```jsx
+        const [state, dispatch] = useReducer(reducer, initialState);
+        ```
+
+### State 與 Action
+
+    - State
+
+        State 是應用程序當前的狀態數據，可以是一個簡單的值，也可以是一個對象或更複雜的結構。
+
+    - Action
+
+        Action 是一個描述狀態變更的對象，通常包含 type 屬性和可選的 payload 屬性。
+
+    ```jsx
+        const action = { type: 'INCREMENT' };
+        const actionWithPayload = { type: 'UPDATE_USER', payload: { name: 'John' } };
+        ```
+
+### Reducer 函數
+
+Reducer 函數根據 action 的類型更新 state，它是一個純函數，保證同樣的輸入必然返回同樣的輸出，並且不產生副作用。
+
+    ```jsx
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case 'INCREMENT':
+                return { count: state.count + 1 };
+            case 'DECREMENT':
+                return { count: state.count - 1 };
+            case 'RESET':
+                return { count: 0 };
+            default:
+                throw new Error();
+        }
+    };
+    ```
+
+### 優點
+
+    - 可預測性
+
+        因為 reducer 是純函數，這意味著同樣的輸入會返回同樣的輸出，沒有副作用，這讓狀態管理更加可預測和可測試。
+
+    - 可擴展性
+
+        隨著應用程序變得複雜，可以輕鬆地將新的 action 類型添加到 reducer 中，而不需要改變應用的整體結構。
+
+### 範例應用
+
+以下是一個完整的範例，展示了如何在 React 中使用 useReducer 來管理計數器的狀態。
+
+```jsx
+import React, { useReducer } from "react";
+
+const initialState = {
+  count: 0,
+  history: [],
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return {
+        ...state,
+        count: state.count + 1,
+        history: [...state.history, state.count + 1],
+      };
+    case "DECREMENT":
+      return {
+        ...state,
+        count: state.count - 1,
+        history: [...state.history, state.count - 1],
+      };
+    case "RESET":
+      return {
+        ...state,
+        count: 0,
+        history: [],
+      };
+    default:
+      return state;
+  }
+};
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <p>History: {state.history.join(", ")}</p>
+      <button onClick={() => dispatch({ type: "INCREMENT" })}>Increment</button>
+      <button onClick={() => dispatch({ type: "DECREMENT" })}>Decrement</button>
+      <button onClick={() => dispatch({ type: "RESET" })}>Reset</button>
+    </div>
+  );
+}
+
+export default Counter;
+```
