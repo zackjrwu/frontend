@@ -2,7 +2,7 @@
 tags: [React]
 ---
 
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 
 Reducer 是一個純函數，接收當前的 state 和 action，並返回新的 state。這個模式在 React 中常用於管理複雜的 state，特別是在使用 useReducer hook 的時候。它的運作方式與 Redux 中的 reducer 相似。簡單來說是都互相啟發。
 
@@ -89,7 +89,7 @@ Reducer 函數根據 action 的類型更新 state，它是一個純函數，保�
 
 ### 範例應用
 
-以下是一個完整的範例，展示了如何在 React 中使用 useReducer 來管理計數器的狀態。
+以下是一個範例，展示了如何在 React 中使用 useReducer 和 useState 來管理計數器的狀態。
 
 ```jsx
 import React, { useReducer } from "react";
@@ -104,14 +104,14 @@ const reducer = (state, action) => {
     case "INCREMENT":
       return {
         ...state,
-        count: state.count + 1,
-        history: [...state.history, state.count + 1],
+        count: state.count + action.step,
+        history: [...state.history, state.count + action.step],
       };
     case "DECREMENT":
       return {
         ...state,
-        count: state.count - 1,
-        history: [...state.history, state.count - 1],
+        count: state.count - action.step,
+        history: [...state.history, state.count - action.step],
       };
     case "RESET":
       return {
@@ -124,19 +124,100 @@ const reducer = (state, action) => {
   }
 };
 
+  const buttonStyle = {
+    margin: '10px'
+  };
+
 function Counter() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const [ state, dispatch ] = useReducer(reducer, initialState);
+  const [ step, setStep ] = useState(1);
+
+  const handleChange = (e) => {
+    setStep(Number(e.target.value));
+  }
+
+  const handleReset = () => {
+    setStep(1);
+    dispatch({ type: 'RESET' });
+  }
 
   return (
     <div>
       <p>Count: {state.count}</p>
-      <p>History: {state.history.join(", ")}</p>
-      <button onClick={() => dispatch({ type: "INCREMENT" })}>Increment</button>
-      <button onClick={() => dispatch({ type: "DECREMENT" })}>Decrement</button>
-      <button onClick={() => dispatch({ type: "RESET" })}>Reset</button>
+      <p>History: {state.history.join(', ')}</p>
+      <p>Step: {step}</p>
+      <input value={step} onChange={handleChange} type="number" />
+      <br/>
+      <button style={buttonStyle} onClick={() => dispatch({ type: 'INCREMENT', step })}>Increment</button>
+      <button style={buttonStyle} onClick={() => dispatch({ type: 'DECREMENT', step })}>Decrement</button>
+      <button style={buttonStyle} onClick={handleReset}>Reset</button>
     </div>
   );
 }
 
 export default Counter;
 ```
+
+export const Counter = () => {
+  const initialState = {
+    count: 0,
+    history: [],
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case 'INCREMENT':
+        return {
+          ...state,
+          count: state.count + action.step,
+          history: [...state.history, state.count + action.step],
+        };
+      case 'DECREMENT':
+        return {
+          ...state,
+          count: state.count - action.step,
+          history: [...state.history, state.count - action.step],
+        };
+      case 'RESET':
+        return {
+          ...state,
+          count: 0,
+          history: [],
+        };
+      default:
+        return state;
+    }
+  };
+
+  const buttonStyle = {
+    margin: '10px'
+  };
+
+  const [ state, dispatch ] = useReducer(reducer, initialState);
+  const [ step, setStep ] = useState(1);
+
+  const handleChange = (e) => {
+    setStep(Number(e.target.value));
+  }
+
+  const handleReset = () => {
+    setStep(1);
+    dispatch({ type: 'RESET' });
+  }
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <p>History: {state.history.join(', ')}</p>
+      <p>Step: {step}</p>
+      <input value={step} onChange={handleChange} type="number" />
+      <br/>
+      <button style={buttonStyle} onClick={() => dispatch({ type: 'INCREMENT', step })}>Increment</button>
+      <button style={buttonStyle} onClick={() => dispatch({ type: 'DECREMENT', step })}>Decrement</button>
+      <button style={buttonStyle} onClick={handleReset}>Reset</button>
+    </div>
+  );
+};
+
+<Counter />
