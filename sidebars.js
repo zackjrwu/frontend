@@ -32,6 +32,7 @@ const sidebars = {
           ],
         },
         "javascriptThings/rest-vs-spread",
+        "javascriptThings/error-handling",
       ],
     },
     {
