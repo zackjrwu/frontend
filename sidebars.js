@@ -31,8 +31,10 @@ const sidebars = {
             "javascriptThings/justJavascript/02 JavaScript Universe",
           ],
         },
+        "javascriptThings/what-is-scope",
+        "javascriptThings/what-is-closure",
         "javascriptThings/rest-vs-spread",
-        "javascriptThings/error-handling",
+        "javascriptThings/error-handling"
       ],
     },
     {
