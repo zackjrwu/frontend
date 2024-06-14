@@ -3,35 +3,41 @@ sidebar_label: "What is React Hook ?"
 tags: [React]
 ---
 
-import React, { useState } from 'react';
+import WhatIsHook from "@site/src/components/reactThings/WhatIsHook";
 
 # What is React Hook ?
 
 ## React Hooks 簡介
+
 - Hooks 是 React 中的特殊函數，允許接入 React 的內部機制。
 - Hooks 是暴露 React 內部功能的 API。
 
 ## Hooks 使用和好處
+
 - 使用 useState 或 useEffect 可以接入 React 的內部機制。
 - Hooks 允許手動選擇 DOM nodes、訪問上下文等功能。
 - 所有 Hooks 都以 “use” 開頭，方便與其他函數區分。
 - 可以創建自定義 Hooks，用於重用非視覺邏輯。
 
 ## React 組件和 Hooks
+
 - 過去基於 JavaScript 類的組件需要用於管理狀態和生命周期。
 - Hooks 的引入使得基於函數的組件可以有自己的狀態並運行副作用。
 
 ## React 內置 Hooks
+
 - React 有近 20 個內置的 Hooks。
 - useState 和 useEffect 是最重要和最常用的 Hooks。
 - 還有其他如 useReducer、useContext、useRef、useCallback 和 useMemo。
 
 ## Hooks 規則和實作細節
+
 - 需遵守兩個簡單的 Hooks 規則：只能在**頂層調用**，且只能從 React 函數中調用。
 - 違反規則會導致渲染和狀態跟蹤的問題。
 - React 的 ESLint 規則會自動執行這些規則。
 
 ## Hooks 工作原理深入探討
+
 - 每次渲染 React 都會創建一個元素樹和纖維樹。
 - 每個纖程包含所有使用過的 Hooks 的鏈表。
 - 重要的是保持 Hooks 被調用的順序一致，避免渲染問題。
@@ -39,13 +45,16 @@ import React, { useState } from 'react';
 ## 為什麼只能在頂層使用？
 
 ### 鏈表原理
+
 在計算機科學中，鏈表是一種數據結構，它由一系列節點組成，每個節點都包含數據和指向下一個節點的鏈接（或指針）。
 在 React Hooks 的情境中，每個鉤子都是鏈表中的一個節點，每個節點包含該鉤子的狀態和指向下一個鉤子的鏈接。
 
 ### React 中的鏈表
+
 當 React 渲染一個使用 Hooks 的函數組件時，它會根據這些 Hooks 被調用的順序，為每個組件創建一個鏈表。這個鏈表存儲了該組件中所有 Hooks 的狀態信息。例如，如果一個組件有多個 **useState** 或 **useEffect** 調用，React 將按照這些 Hooks 調用的順序，為它們創建一個鏈表。
 
 ### 保持順序的重要性
+
 為何保持 Hooks 被調用的順序一致性如此重要？這是因為 React 靠這個順序來確定哪個狀態屬於哪個鉤子。如果這個順序在不同的渲染之間發生變化，React 就無法正確匹配狀態和鉤子，這會導致錯誤和不預期的行為。
 
 ## 使用 useState Hook 的正確範例
@@ -54,11 +63,11 @@ import React, { useState } from 'react';
 
 ```jsx
 // 這裡用 useState hook 示範
-import React, { useState } from 'react';
+import React, { useState } from "react";
 export const RightCounter = () => {
-   // 在頂層調用 useState
-   const [count, setCount] = useState(0);
-    const handleIncrement = () => {
+  // 在頂層調用 useState
+  const [count, setCount] = useState(0);
+  const handleIncrement = () => {
     setCount(count + 1);
   };
 
@@ -68,26 +77,8 @@ export const RightCounter = () => {
       <button onClick={handleIncrement}>Increment</button>
     </div>
   );
-}
+};
 ```
-
-export const RightCounter = () => {
-   // 在頂層調用 useState
-   const [count, setCount] = useState(0);
-    const handleIncrement = () => {
-    setCount(count + 1);
-  };
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={handleIncrement}>Increment</button>
-    </div>
-  );
-}
-
-<RightCounter/>
-<br />
 
 在這個範例中，useState 在組件的頂層被調用，每次渲染時，調用順序保持不變。
 
@@ -97,9 +88,8 @@ export const RightCounter = () => {
 
 ```jsx
 // 這裡用 useState hook 示範
-import React, { useState } from 'react';
-export const WrongCounter = ({initialValue}) => {
-
+import React, { useState } from "react";
+export const WrongCounter = ({ initialValue }) => {
   let countState;
 
   if (initialValue > 0) {
@@ -122,33 +112,7 @@ export const WrongCounter = ({initialValue}) => {
       <button onClick={handleIncrement}>Increment</button>
     </div>
   );
-}
+};
 ```
 
-export const WrongCounter = ({initialValue}) => {
-
-  let countState;
-
-  if (initialValue > 0) {
-    // 在條件語句中調用 useState - 錯誤做法
-    countState = useState(initialValue);
-  } else {
-    // 在條件語句中調用 useState - 錯誤做法
-    countState = useState(0);
-  }
-
-  const [count, setCount] = countState;
-
-  const increment = () => {
-    setCount(count + 1);
-  };
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={increment}>Increment</button>
-    </div>
-  );
-}
-
-<WrongCounter />
+<WhatIsHook />
