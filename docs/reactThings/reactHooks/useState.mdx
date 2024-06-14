@@ -2,7 +2,10 @@
 tags: [React]
 ---
 
-import React, { useState } from "react";
+import {
+  RightUseStateDemo,
+  WrongUseStateDemo,
+} from "@site/src/components/reactThings/UseStateDemo";
 
 ### **創建狀態 (`useState`)**
 
@@ -42,22 +45,7 @@ export const RightCounter = () => {
 };
 ```
 
-export const WrongCounter = () => {
-  const [count, setCount] = useState(0);
-  const handleIncrement = () => {
-    setCount(count + 1);
-    setCount(count + 1);
-    setCount(count + 1);
-  };
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={handleIncrement}>Increment</button>
-    </div>
-  );
-};
-
-<WrongCounter />
+<WrongUseStateDemo />
 <br />
 
 ```jsx
@@ -80,22 +68,7 @@ export const RightCounter = () => {
 };
 ```
 
-export const RightCounter = () => {
-  const [count, setCount] = useState(0);
-  const handleIncrement = () => {
-    setCount((prev) => prev + 1);
-    setCount((prev) => prev + 1);
-    setCount((prev) => prev + 1);
-  };
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={handleIncrement}>Increment</button>
-    </div>
-  );
-};
-
-<RightCounter />
+<RightUseStateDemo />
 <br />
 
 ### **注意事項**
