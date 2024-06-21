@@ -7,7 +7,7 @@ tags: [Javascript]
 
 ## 前端程式語言
 
-JavaScript 是一種高級、解釋性、弱型別的腳本語言，廣泛應用於 Web 開發中。作為前端程式語言的核心之一，JavaScript 能夠動態地更新 HTML 和 CSS，從而實現豐富的互動效果和動態內容。最初由 Netscape 在 1995 年開發，JavaScript 現已成為所有現代網頁瀏覽器的標準配備。這種語言既可以在客戶端執行，也可以在伺服器端（例如 Node.js）使用。JavaScript 的語法簡單易學，但功能強大，支持物件導向、函數式和事件驅動的編程風格。隨著各種框架和庫（如 React、Angular、Vue）的出現，JavaScript 在開發複雜單頁應用程式（SPA）和移動應用程式中也扮演著越來越重要的角色。總之，JavaScript 是前端開發者必備的一項技能，也是現代 Web 技術棧的基石。
+JavaScript 是一種高級、解釋性、弱型別的腳本語言，廣泛應用於 Web 開發中。作為前端程式語言的核心之一，JavaScript 能夠動態地更新 HTML 和 CSS，從而實現豐富的互動效果和動態內容。最初由 Netscape 在 1995 年開發，JavaScript 現已成為所有現代網頁瀏覽器的標準配備。這種語言既可以在客戶端執行，也可以在伺服器端（例如 Node.js）使用。JavaScript 的語法簡單易學，但功能強大，支持物件導向、函式式和事件驅動的編程風格。隨著各種框架和庫（如 React、Angular、Vue）的出現，JavaScript 在開發複雜單頁應用程式（SPA）和移動應用程式中也扮演著越來越重要的角色。總之，JavaScript 是前端開發者必備的一項技能，也是現代 Web 技術棧的基石。
 
 ## 歷史
 
@@ -48,7 +48,7 @@ JavaScript 通常嵌入在 HTML 文件中。你可以將 JavaScript 程式碼放
 </html>
 ```
 
-在這個範例中，showMessage 函數定義在 `<script>` 標籤內，並通過按鈕的 onclick 事件觸發。
+在這個範例中，showMessage 函式定義在 `<script>` 標籤內，並通過按鈕的 onclick 事件觸發。
 
 **範例 2：外部 JavaScript 文件**
 將 JavaScript 程式碼放在外部文件中，然後在 HTML 中引用它：
@@ -100,7 +100,7 @@ JavaScript 可以用來動態改變網頁內容。以下是一個範例，展示
 </html>
 ```
 
-在這個範例中，changeText 函數使用 document.getElementById 方法來訪問 HTML 元素，並更新其內容。
+在這個範例中，changeText 函式使用 document.getElementById 方法來訪問 HTML 元素，並更新其內容。
 
 **範例 4：事件處理**
 JavaScript 可以用來處理各種事件，如點擊、鼠標移動等。
@@ -126,7 +126,7 @@ JavaScript 可以用來處理各種事件，如點擊、鼠標移動等。
 </html>
 ```
 
-在這個範例中，點擊藍色方框會觸發 changeColor 函數，改變其背景顏色。
+在這個範例中，點擊藍色方框會觸發 changeColor 函式，改變其背景顏色。
 
 ## 總結
 

@@ -32,6 +32,7 @@ const sidebars = {
           ],
         },
         "javascriptThings/what-is-scope",
+        "javascriptThings/what-is-hoisting",
         "javascriptThings/what-is-var",
         "javascriptThings/what-is-closure",
         "javascriptThings/rest-vs-spread",

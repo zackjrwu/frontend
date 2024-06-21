@@ -5,11 +5,11 @@ tags: [Javascript]
 
 # What is Scope
 
-在 JavaScript 中，作用域（Scope）是指變數和函數可訪問的範圍。理解作用域對寫出可靠與高效的程式碼是相當重要的。
+在 JavaScript 中，作用域（Scope）是指變數和函式可訪問的範圍。理解作用域對寫出可靠與高效的程式碼是相當重要的。
 
 ## 全局作用域（Global Scope）
 
-在全局作用域的底下的變數和函數在任何地方都可使用，也就是在最外層，任何寫的程式碼都是越來越往內部，所以無論包了多少層，都總是可以取用得到。
+在全局作用域的底下的變數和函式在任何地方都可使用，也就是在最外層，任何寫的程式碼都是越來越往內部，所以無論包了多少層，都總是可以取用得到。
 
 ```js {1}
 const number = 10; //  Global variable
@@ -22,7 +22,7 @@ printInfo("Zack"); //  I am Zack, I am 10 years old.
 :::danger 注意
 
     1. 全局變數污染：全局作用域中的變數在整個程式碼中都可訪問，容易引起變數命名衝突。為避免這種情況，應盡量減少使用全局變數。
-    2. 全局對象：在瀏覽器環境中，全局變數和函數會成為 window 對象的屬性。在 Node.js 環境中，全局對象是 global。
+    2. 全局對象：在瀏覽器環境中，全局變數和函式會成為 window 對象的屬性。在 Node.js 環境中，全局對象是 global。
     3. 模塊化：現代 JavaScript 中，使用模塊（modules）可以幫助減少全局變數，並且使程式碼更加結構化和易於維護。
     ```js
         // module.js
@@ -38,9 +38,9 @@ printInfo("Zack"); //  I am Zack, I am 10 years old.
 
 :::
 
-## 函數作用域（Function Scope）
+## 函式作用域（Function Scope）
 
-在函數中定義的變數就只能在裡面使用，不能踏出去半步啊！
+在函式中定義的變數就只能在裡面使用，不能踏出去半步啊！
 
 ```js {7}
 const printInfo = () => {

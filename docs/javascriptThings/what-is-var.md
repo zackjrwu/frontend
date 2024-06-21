@@ -5,11 +5,11 @@ tags: [Javascript]
 
 # Var vs Let vs Const
 
-在 JavaScript 中，var、let 和 const 是用來宣告變數的關鍵字。它們在作用域、重新賦值以及提升（hoisting）行為上有顯著的不同。
+在 JavaScript 中，var、let 和 const 是用來宣告變數的關鍵字。它們在[作用域](./what-is-scope.md)、重新賦值以及[提升](./what-is-hoisting.md)（hoisting）行為上有顯著的不同。
 
 ## var
  - 作用域（Scope）
-   - **var** 是函數作用域（function scope）。這意味著在同一個函數內，**var** 宣告的變數在整個函數內都是可見的。
+   - **var** 是函式作用域（function scope）。這意味著在同一個函式內，**var** 宣告的變數在整個函式內都是可見的。
    - **var** 也可以在全局作用域中宣告變數。
 
  - 提升（Hoisting）：
@@ -19,11 +19,11 @@ tags: [Javascript]
    -  **var** 宣告的變數可以被重新賦值。
 
  - 重複宣告（Redeclaration）： 
-   -  **var** 允許在同一作用域內重複宣告變數。這意味著可以在同一個函數或區塊內多次宣告同一個變數，而不會拋出錯誤，且後面的宣告會覆蓋前面的宣告。
+   -  **var** 允許在同一作用域內重複宣告變數。這意味著可以在同一個函式或區塊內多次宣告同一個變數，而不會拋出錯誤，且後面的宣告會覆蓋前面的宣告。
 
 
 
-```js {2} title="var 函數作用域範例"
+```js {2} title="var 函式作用域範例"
 const printInfo = (name) => {
   var number = 20;
   console.log(`I am ${name}, I am ${number} years old.`);
@@ -47,7 +47,7 @@ printInfo("Zack"); //  I am Zack, I am 30 years old.
 console.log(number); // 30，這很危險，變數被函式改掉了！
 ```
 
-```js {3} title="var 函數作用域與被重新賦值範例"
+```js {3} title="var 函式作用域與被重新賦值範例"
 var number = 20;
 if (true) {
   var number = 30; // 修改了全局變數

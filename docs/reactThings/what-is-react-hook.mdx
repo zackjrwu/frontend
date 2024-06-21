@@ -9,20 +9,20 @@ import WhatIsHook from "@site/src/components/reactThings/WhatIsHook";
 
 ## React Hooks 簡介
 
-- Hooks 是 React 中的特殊函數，允許接入 React 的內部機制。
+- Hooks 是 React 中的特殊函式，允許接入 React 的內部機制。
 - Hooks 是暴露 React 內部功能的 API。
 
 ## Hooks 使用和好處
 
 - 使用 useState 或 useEffect 可以接入 React 的內部機制。
 - Hooks 允許手動選擇 DOM nodes、訪問上下文等功能。
-- 所有 Hooks 都以 “use” 開頭，方便與其他函數區分。
+- 所有 Hooks 都以 “use” 開頭，方便與其他函式區分。
 - 可以創建自定義 Hooks，用於重用非視覺邏輯。
 
 ## React 組件和 Hooks
 
 - 過去基於 JavaScript 類的組件需要用於管理狀態和生命周期。
-- Hooks 的引入使得基於函數的組件可以有自己的狀態並運行副作用。
+- Hooks 的引入使得基於函式的組件可以有自己的狀態並運行副作用。
 
 ## React 內置 Hooks
 
@@ -32,7 +32,7 @@ import WhatIsHook from "@site/src/components/reactThings/WhatIsHook";
 
 ## Hooks 規則和實作細節
 
-- 需遵守兩個簡單的 Hooks 規則：只能在**頂層調用**，且只能從 React 函數中調用。
+- 需遵守兩個簡單的 Hooks 規則：只能在**頂層調用**，且只能從 React 函式中調用。
 - 違反規則會導致渲染和狀態跟蹤的問題。
 - React 的 ESLint 規則會自動執行這些規則。
 
@@ -51,7 +51,7 @@ import WhatIsHook from "@site/src/components/reactThings/WhatIsHook";
 
 ### React 中的鏈表
 
-當 React 渲染一個使用 Hooks 的函數組件時，它會根據這些 Hooks 被調用的順序，為每個組件創建一個鏈表。這個鏈表存儲了該組件中所有 Hooks 的狀態信息。例如，如果一個組件有多個 **useState** 或 **useEffect** 調用，React 將按照這些 Hooks 調用的順序，為它們創建一個鏈表。
+當 React 渲染一個使用 Hooks 的函式組件時，它會根據這些 Hooks 被調用的順序，為每個組件創建一個鏈表。這個鏈表存儲了該組件中所有 Hooks 的狀態信息。例如，如果一個組件有多個 **useState** 或 **useEffect** 調用，React 將按照這些 Hooks 調用的順序，為它們創建一個鏈表。
 
 ### 保持順序的重要性
 
@@ -59,7 +59,7 @@ import WhatIsHook from "@site/src/components/reactThings/WhatIsHook";
 
 ## 使用 useState Hook 的正確範例
 
-在 React 函數組件中，我們應該在頂層調用 useState Hook。這樣可以確保每次渲染時 Hook 的調用順序不變，從而避免錯誤。以下是一個正確的範例：
+在 React 函式組件中，我們應該在頂層調用 useState Hook。這樣可以確保每次渲染時 Hook 的調用順序不變，從而避免錯誤。以下是一個正確的範例：
 
 ```jsx
 // 這裡用 useState hook 示範
