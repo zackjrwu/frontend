@@ -1,4 +1,35 @@
+import { useState } from "react";
 import styles from "./styles.module.css";
+import songsList from "./data";
+
+const audio = new Audio();
+
+let userData = {
+  songs: [...songsList],
+  currentSong: null,
+  songCurrentTime: 0
+}
+
+const playSong = (id) => {
+  const song = userData?.songs.find(song => song.id === id);
+  audio.src = song.src;
+  audio.title = song.title;
+
+  //  這種情況是第一次播放歌曲或是切換到不同歌曲
+  if(userData?.currentSong === null || userData?.currentSong.id !== song.id) {
+    audio.currentTime = 0;
+  // 這種情況是暫停後繼續播放，所以 player 會從暫停的時間點開始播放
+  } else {
+    audio.currentTime = userData?.songCurrentTime;
+  }
+  userData.currentSong = song;
+  // playButton.classList.add("playing");
+  // highlightCurrentSong();
+  // setPlayerDisplay();
+  // setPlayButtonAccessibleText();
+  audio.play();
+}
+
 const PlayerContent = () => {
   return (
     <div className={styles.playerContent}>
@@ -20,6 +51,25 @@ const PlayerContent = () => {
 };
 
 const PlayerButtons = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlayIconClick = () => {
+    if(isPlaying) return;
+    if (userData?.currentSong === null) {
+      setIsPlaying(true);
+      playSong(userData?.songs[0].id);
+    } else {
+      setIsPlaying(true);
+      playSong(userData?.currentSong.id);
+    }
+  }
+
+  const handlePauseIconClick = () => {
+    setIsPlaying(false);
+    userData.songCurrentTime = audio.currentTime;
+    audio.pause();
+  }
+
   return (
     <div className={styles.playerButtons}>
       <button id="previous" className={styles.previous} aria-label="Previous">
@@ -38,7 +88,7 @@ const PlayerButtons = () => {
           />
         </svg>
       </button>
-      <button id="play" className={styles.play} aria-label="Play">
+      <button id="play" onClick={handlePlayIconClick} className={`${styles.button} ${isPlaying ? styles.playing : ""}`} aria-label="Play">
         <svg
           width="17"
           height="19"
@@ -49,7 +99,7 @@ const PlayerButtons = () => {
           <path d="M0 0L16.1852 9.5L1.88952e-07 19L0 0Z" />
         </svg>
       </button>
-      <button id="pause" className={styles.pause} aria-label="Pause">
+      <button id="pause" onClick={handlePauseIconClick} className={styles.pause} aria-label="Pause">
         <svg
           width="17"
           height="19"
