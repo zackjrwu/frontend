@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./styles.module.css";
 import PlayerBar from "./PlayerBar";
 import PlayerContent from "./PlayerContent";
@@ -7,8 +7,7 @@ import songsList from "./data";
 
 const MusicPlayer = () => {
   const [songs, setSongs] = useState(songsList);
-  const audioRef = typeof window !== "undefined" ? useRef(new Audio()) : null;
-
+  const audioRef = useRef(null);
   const [playerState, setPlayerState] = useState({
     currentSong: null,
     songCurrentTime: 0,
@@ -39,6 +38,12 @@ const MusicPlayer = () => {
     });
     audioRef.current.play();
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      audioRef.current = new Audio();
+    }
+  }, []);
 
   return (
     <div className={styles.musicPlayer}>
