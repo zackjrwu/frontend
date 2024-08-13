@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 
-const audio = new Audio();
+//  deploy bug
+// const audio = new Audio();
+const audio = typeof window !== 'undefined' ? new Audio() : null;
 
 const PlayerContent = ({songs, setSongs}) => {
   const [playerState, setPlayerState] = useState({
