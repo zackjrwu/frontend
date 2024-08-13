@@ -1,42 +1,14 @@
 import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 
-//  deploy bug
-// const audio = new Audio();
-const audio = typeof window !== "undefined" ? new Audio() : null;
-
-const PlayerContent = ({ songs, setSongs }) => {
-  const [playerState, setPlayerState] = useState({
-    currentSong: null,
-    songCurrentTime: 0,
-    isPlaying: false,
-  });
-
-  const updatePlayerState = (newState) => {
-    setPlayerState((prevState) => ({ ...prevState, ...newState }));
-  };
-
-  const playSong = (id) => {
-    const song = songs.find((song) => song.id === id);
-    audio.src = song.src;
-    audio.title = song.title;
-
-    if (
-      playerState.currentSong === null ||
-      playerState.currentSong.id !== song.id
-    ) {
-      audio.currentTime = 0;
-    } else {
-      audio.currentTime = playerState.songCurrentTime;
-    }
-
-    updatePlayerState({
-      currentSong: song,
-      isPlaying: true,
-    });
-    audio.play();
-  };
-
+const PlayerContent = ({
+  songs,
+  setSongs,
+  playSong,
+  updatePlayerState,
+  audio,
+  playerState,
+}) => {
   const pauseSong = () => {
     audio.pause();
     updatePlayerState({

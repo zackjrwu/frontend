@@ -1,11 +1,16 @@
 import styles from "./styles.module.css";
-const Playlist = ({ songs, setSongs }) => {
+const Playlist = ({ songs, setSongs, playSong, currentSongId }) => {
   const sortSongs = (songs) => {
     return songs.sort((a, b) => a.title.localeCompare(b.title));
   };
 
   const list = sortSongs(songs).map((song) => (
-    <li key={song.id} id={`song-${song.id}`} className={styles.playlistSong}>
+    <li
+      key={song.id}
+      id={`song-${song.id}`}
+      className={styles.playlistSong}
+      aria-current={song.id === currentSongId ? "true" : undefined}
+    >
       <button
         className={styles.playlistSongInfo}
         onClick={() => playSong(song.id)}
