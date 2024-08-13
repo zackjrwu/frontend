@@ -90,9 +90,29 @@ const PlayerButtons = ({ playerState, playSong, pauseSong, songs }) => {
     }
   }
 
+  const handleNextButtonClick = () => {
+    if (playerState.currentSong === null) {
+      playSong(songs[0].id);
+      return;
+    }
+    const currentSongIndex = songs.findIndex(song => song.id === playerState.currentSong.id);
+    const nextSongIndex = (currentSongIndex + 1) % songs.length;
+    playSong(songs[nextSongIndex].id);
+  }
+
+  const handlePreviousButtonClick = () => {
+    if (playerState.currentSong === null) return;
+    const currentSongIndex = songs.findIndex(
+      (song) => song.id === playerState.currentSong.id
+    );
+    const previousSongIndex =
+      (currentSongIndex - 1 + songs.length) % songs.length;
+    playSong(songs[previousSongIndex].id);
+  };
+
   return (
     <div className={styles.playerButtons}>
-      <button id="previous" className={styles.previous} aria-label="Previous">
+      <button id="previous" onClick={handlePreviousButtonClick} className={styles.previous} aria-label="Previous">
         <svg
           width="24"
           height="19"
@@ -131,7 +151,7 @@ const PlayerButtons = ({ playerState, playSong, pauseSong, songs }) => {
           <path d="M11.4 0H16.15V19H11.4V0Z" />
         </svg>
       </button>
-      <button id="next" className={styles.next} aria-label="Next">
+      <button id="next" onClick={handleNextButtonClick} className={styles.next} aria-label="Next">
         <svg
           width="24"
           height="19"

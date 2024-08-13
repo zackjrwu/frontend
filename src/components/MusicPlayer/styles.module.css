@@ -161,7 +161,7 @@
   text-align: center;
 }
 
-.musicPlayer .playlist-song {
+.musicPlayer .playlistSong {
   outline-color: var(--highlight-color);
 }
 
@@ -170,7 +170,7 @@
 }
 
 .musicPlayer button:focus,
-.musicPlayer .playlist-song:focus {
+.musicPlayer .playlistSong:focus {
   outline-style: dashed;
   outline-width: 2px;
 }
@@ -198,7 +198,7 @@
   list-style: none;
 }
 
-.musicPlayer .playlist-song {
+.musicPlayer .playlistSong {
   display: flex;
   height: 55px;
   justify-content: space-between;
@@ -214,7 +214,7 @@
   color: var(--highlight-color);
 }
 
-.musicPlayer .playlist-song-info {
+.musicPlayer .playlistSongInfo {
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -239,18 +239,18 @@
   font-size: 1.125rem;
 }
 
-.musicPlayer .playlist-song-title {
+.musicPlayer .playlistSongTitle {
   font-size: 0.85rem;
   width: 241px;
   text-align: left;
 }
 
-.musicPlayer .playlist-song-artist {
+.musicPlayer .playlistSongArtist {
   font-size: 0.725rem;
   width: 80px;
 }
 
-.musicPlayer .playlist-song-duration {
+.musicPlayer .playlistSongDuration {
   font-size: 0.725rem;
   margin: auto;
   font-family: var(--font-headline);
@@ -319,19 +319,19 @@
     width: 280px;
   }
 
-  .musicPlayer .playlist-song {
+  .musicPlayer .playlistSong {
     justify-content: space-between;
   }
 
-  .musicPlayer .playlist-song-title {
+  .musicPlayer .playlistSongTitle {
     width: 140px;
   }
 
-  .musicPlayer .playlist-song-artist {
+  .musicPlayer .playlistSongArtist {
     width: 40px;
   }
 
-  .musicPlayer .playlist-song-duration > button {
+  .musicPlayer .playlistSongDuration > button {
     padding: 0;
   }
 
