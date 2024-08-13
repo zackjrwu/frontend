@@ -7,7 +7,7 @@ import songsList from "./data";
 
 const MusicPlayer = () => {
   const [songs, setSongs] = useState(songsList);
-  const audioRef = useRef(new Audio());
+  const audioRef = typeof window !== "undefined" ? new Audio() : null;
 
   const [playerState, setPlayerState] = useState({
     currentSong: null,
