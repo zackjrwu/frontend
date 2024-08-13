@@ -17,18 +17,6 @@ const PlayerContent = ({
     });
   };
 
-  useEffect(() => {
-    const handleTimeUpdate = () => {
-      updatePlayerState({ songCurrentTime: audio.currentTime });
-    };
-
-    audio.addEventListener("timeupdate", handleTimeUpdate);
-
-    return () => {
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
-    };
-  }, []);
-
   return (
     <div className={styles.playerContent}>
       <div id={styles.playerAlbumArt}>
