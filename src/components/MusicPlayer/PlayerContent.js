@@ -3,43 +3,45 @@ import styles from "./styles.module.css";
 
 //  deploy bug
 // const audio = new Audio();
-const audio = typeof window !== 'undefined' ? new Audio() : null;
+const audio = typeof window !== "undefined" ? new Audio() : null;
 
-const PlayerContent = ({songs, setSongs}) => {
+const PlayerContent = ({ songs, setSongs }) => {
   const [playerState, setPlayerState] = useState({
     currentSong: null,
     songCurrentTime: 0,
-    isPlaying: false
+    isPlaying: false,
   });
 
   const updatePlayerState = (newState) => {
-    setPlayerState(prevState => ({ ...prevState, ...newState }));
+    setPlayerState((prevState) => ({ ...prevState, ...newState }));
   };
 
   const playSong = (id) => {
-    const song = songs.find(song => song.id === id);
+    const song = songs.find((song) => song.id === id);
     audio.src = song.src;
     audio.title = song.title;
 
-    if (playerState.currentSong === null || playerState.currentSong.id !== song.id) {
+    if (
+      playerState.currentSong === null ||
+      playerState.currentSong.id !== song.id
+    ) {
       audio.currentTime = 0;
     } else {
       audio.currentTime = playerState.songCurrentTime;
     }
 
-    updatePlayerState({ 
-      currentSong: song, 
-      isPlaying: true 
+    updatePlayerState({
+      currentSong: song,
+      isPlaying: true,
     });
-    
     audio.play();
   };
 
   const pauseSong = () => {
     audio.pause();
-    updatePlayerState({ 
+    updatePlayerState({
       isPlaying: false,
-      songCurrentTime: audio.currentTime 
+      songCurrentTime: audio.currentTime,
     });
   };
 
@@ -48,10 +50,10 @@ const PlayerContent = ({songs, setSongs}) => {
       updatePlayerState({ songCurrentTime: audio.currentTime });
     };
 
-    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener("timeupdate", handleTimeUpdate);
 
     return () => {
-      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
     };
   }, []);
 
@@ -68,7 +70,7 @@ const PlayerContent = ({songs, setSongs}) => {
           <p id={styles.playerSongTitle}></p>
           <p id={styles.playerSongArtist}></p>
         </div>
-        <PlayerButtons 
+        <PlayerButtons
           playerState={playerState}
           playSong={playSong}
           pauseSong={pauseSong}
@@ -80,25 +82,26 @@ const PlayerContent = ({songs, setSongs}) => {
 };
 
 const PlayerButtons = ({ playerState, playSong, pauseSong, songs }) => {
-
   const handlePlayIconClick = () => {
-    if(playerState.isPlaying) return;
+    if (playerState.isPlaying) return;
     if (playerState.currentSong === null) {
       playSong(songs[0].id);
     } else {
       playSong(playerState.currentSong.id);
     }
-  }
+  };
 
   const handleNextButtonClick = () => {
     if (playerState.currentSong === null) {
       playSong(songs[0].id);
       return;
     }
-    const currentSongIndex = songs.findIndex(song => song.id === playerState.currentSong.id);
+    const currentSongIndex = songs.findIndex(
+      (song) => song.id === playerState.currentSong.id
+    );
     const nextSongIndex = (currentSongIndex + 1) % songs.length;
     playSong(songs[nextSongIndex].id);
-  }
+  };
 
   const handlePreviousButtonClick = () => {
     if (playerState.currentSong === null) return;
@@ -112,7 +115,12 @@ const PlayerButtons = ({ playerState, playSong, pauseSong, songs }) => {
 
   return (
     <div className={styles.playerButtons}>
-      <button id="previous" onClick={handlePreviousButtonClick} className={styles.previous} aria-label="Previous">
+      <button
+        id="previous"
+        onClick={handlePreviousButtonClick}
+        className={styles.previous}
+        aria-label="Previous"
+      >
         <svg
           width="24"
           height="19"
@@ -128,7 +136,14 @@ const PlayerButtons = ({ playerState, playSong, pauseSong, songs }) => {
           />
         </svg>
       </button>
-      <button id="play" onClick={handlePlayIconClick} className={`${styles.button} ${playerState.isPlaying ? styles.playing : ""}`} aria-label="Play">
+      <button
+        id="play"
+        onClick={handlePlayIconClick}
+        className={`${styles.button} ${
+          playerState.isPlaying ? styles.playing : ""
+        }`}
+        aria-label="Play"
+      >
         <svg
           width="17"
           height="19"
@@ -139,7 +154,12 @@ const PlayerButtons = ({ playerState, playSong, pauseSong, songs }) => {
           <path d="M0 0L16.1852 9.5L1.88952e-07 19L0 0Z" />
         </svg>
       </button>
-      <button id="pause" onClick={pauseSong} className={styles.pause} aria-label="Pause">
+      <button
+        id="pause"
+        onClick={pauseSong}
+        className={styles.pause}
+        aria-label="Pause"
+      >
         <svg
           width="17"
           height="19"
@@ -151,7 +171,12 @@ const PlayerButtons = ({ playerState, playSong, pauseSong, songs }) => {
           <path d="M11.4 0H16.15V19H11.4V0Z" />
         </svg>
       </button>
-      <button id="next" onClick={handleNextButtonClick} className={styles.next} aria-label="Next">
+      <button
+        id="next"
+        onClick={handleNextButtonClick}
+        className={styles.next}
+        aria-label="Next"
+      >
         <svg
           width="24"
           height="19"
