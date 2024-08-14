@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 
 const PlayerContent = ({
@@ -8,6 +7,8 @@ const PlayerContent = ({
   updatePlayerState,
   audio,
   playerState,
+  volume,
+  onVolumeChange,
 }) => {
   const pauseSong = () => {
     audio.pause();
@@ -15,6 +16,28 @@ const PlayerContent = ({
       isPlaying: false,
       songCurrentTime: audio.currentTime,
     });
+  };
+
+  const VolumeIcon = ({ volume }) => {
+    if (volume > 0.5) return <span>🔊</span>;
+    if (volume > 0) return <span>🔉</span>;
+    return <span>🔇</span>;
+  };
+
+  const VolumeControl = ({ volume, onVolumeChange }) => {
+    return (
+      <div className={styles.volumeControl}>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value={volume}
+          onChange={(e) => onVolumeChange(parseFloat(e.target.value))}
+        />
+        <VolumeIcon volume={volume} />
+      </div>
+    );
   };
 
   return (
@@ -26,13 +49,12 @@ const PlayerContent = ({
         />
       </div>
       <div className={styles.playerDisplay}>
-        {
-          playerState.currentSong &&
+        {playerState.currentSong && (
           <div className={styles.playerDisplayDongArtist}>
             <p id={styles.playerSongTitle}>{playerState.currentSong.title}</p>
             <p id={styles.playerSongArtist}>{playerState.currentSong.artist}</p>
           </div>
-        }
+        )}
 
         <PlayerButtons
           playerState={playerState}
@@ -40,6 +62,7 @@ const PlayerContent = ({
           pauseSong={pauseSong}
           songs={songs}
         />
+        <VolumeControl volume={volume} onVolumeChange={onVolumeChange} />
       </div>
     </div>
   );

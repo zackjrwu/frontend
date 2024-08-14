@@ -8,6 +8,7 @@ import songsList from "./data";
 const MusicPlayer = () => {
   const [songs, setSongs] = useState(songsList);
   const audioRef = useRef(null);
+  const [volume, setVolume] = useState(0.5);
   const [playerState, setPlayerState] = useState({
     currentSong: null,
     songCurrentTime: 0,
@@ -39,11 +40,24 @@ const MusicPlayer = () => {
     audioRef.current.play();
   };
 
+  const handleVolumeChange = (newVolume) => {
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       audioRef.current = new Audio();
     }
   }, []);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
 
   return (
     <div className={styles.musicPlayer}>
@@ -57,6 +71,8 @@ const MusicPlayer = () => {
             updatePlayerState={updatePlayerState}
             playerState={playerState}
             audio={audioRef.current}
+            volume={volume}
+            onVolumeChange={handleVolumeChange}
           />
         </div>
         <Playlist

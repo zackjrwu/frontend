@@ -22,7 +22,7 @@
   box-sizing: border-box;
 }
 
-body .musicPlayer  {
+body .musicPlayer {
   color: var(--primary-color);
   font-family: var(--font-family);
 }
@@ -126,7 +126,8 @@ body .musicPlayer  {
 .musicPlayer .playerDisplay {
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  justify-content: space-around;
+  row-gap: 10px;
   padding: 14px;
   background-color: var(--background-color);
   height: 153px;
@@ -236,6 +237,10 @@ body .musicPlayer  {
 
 .musicPlayer #playerSongTitle {
   font-size: 1.125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .musicPlayer .playlistSongTitle {
@@ -371,4 +376,34 @@ body .musicPlayer  {
     justify-content: space-between;
     text-align: center;
   }
+}
+
+.volumeControl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.volumeControl input[type="range"] {
+  width: 100px;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+.volumeControl input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--highlight-color);
+  cursor: pointer;
+  margin-top: -5px;
+}
+
+.volumeControl input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  background: #ddd;
+  border-radius: 3px;
 }
