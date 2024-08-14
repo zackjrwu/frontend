@@ -22,8 +22,7 @@
   box-sizing: border-box;
 }
 
-.musicPlayer body {
-  background-color: var(--app-background-color);
+body .musicPlayer  {
   color: var(--primary-color);
   font-family: var(--font-family);
 }
@@ -134,7 +133,7 @@
   width: 226px;
 }
 
-.musicPlayer .playerDisplay-song-artist {
+.musicPlayer .playerDisplaySongArtist {
   height: 80px;
 }
 
@@ -354,11 +353,11 @@
     opacity: 0.6;
   }
 
-  .musicPlayer .playerDisplay-song-artist {
+  .musicPlayer .playerDisplaySongArtist {
     padding: 0 10px;
   }
 
-  .musicPlayer .playerDisplay-song-artist > p {
+  .musicPlayer .playerDisplaySongArtist > p {
     white-space: pre-wrap;
   }
 

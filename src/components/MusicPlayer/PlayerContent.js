@@ -26,10 +26,14 @@ const PlayerContent = ({
         />
       </div>
       <div className={styles.playerDisplay}>
-        <div className="player-display-song-artist">
-          <p id={styles.playerSongTitle}></p>
-          <p id={styles.playerSongArtist}></p>
-        </div>
+        {
+          playerState.currentSong &&
+          <div className={styles.playerDisplayDongArtist}>
+            <p id={styles.playerSongTitle}>{playerState.currentSong.title}</p>
+            <p id={styles.playerSongArtist}>{playerState.currentSong.artist}</p>
+          </div>
+        }
+
         <PlayerButtons
           playerState={playerState}
           playSong={playSong}
