@@ -400,7 +400,7 @@ body .musicPlayer {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: #4CAF50;
+  background:  var(--highlight-color);
   cursor: pointer;
 }
 
@@ -408,6 +408,6 @@ body .musicPlayer {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: #4CAF50;
+  background: var(--highlight-color);
   cursor: pointer;
 }
