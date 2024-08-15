@@ -1,4 +1,5 @@
 import styles from "./styles.module.css";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 
 const PlayerContent = ({
   songs,
@@ -16,27 +17,46 @@ const PlayerContent = ({
     playerDispatch({ type: 'SET_CURRENT_TIME', payload: audio.currentTime });
   };
 
-  const VolumeIcon = ({ volume }) => {
-    if (volume > 0.5) return <span>🔊</span>;
+  const VolumeIcon = React.memo(({ volume }) => {
+    if (volume > 50) return <span>🔊</span>;
     if (volume > 0) return <span>🔉</span>;
     return <span>🔇</span>;
-  };
+  });
 
-  const VolumeControl = ({ volume, onVolumeChange }) => {
+  const VolumeControl = React.memo(({ volume, onVolumeChange }) => {
+    const [localVolume, setLocalVolume] = useState(volume);
+    const inputRef = useRef(null);
+  
+    const handleChange = useCallback((e) => {
+      const newVolume = parseInt(e.target.value, 10);
+      setLocalVolume(newVolume);
+    }, []);
+  
+    const handleMouseUp = useCallback(() => {
+      onVolumeChange(localVolume);
+    }, [localVolume, onVolumeChange]);
+  
+    useEffect(() => {
+      setLocalVolume(volume);
+    }, [volume]);
+  
     return (
       <div className={styles.volumeControl}>
         <input
+          ref={inputRef}
           type="range"
           min="0"
-          max="1"
-          step="0.01"
-          value={volume}
-          onChange={(e) => onVolumeChange(parseFloat(e.target.value))}
+          max="100"
+          value={localVolume}
+          onChange={handleChange}
+          onMouseUp={handleMouseUp}
+          onTouchEnd={handleMouseUp}
+          className={styles.volumeSlider}
         />
-        <VolumeIcon volume={volume} />
+        <VolumeIcon volume={localVolume} />
       </div>
     );
-  };
+  });
 
   return (
     <div className={styles.playerContent}>
