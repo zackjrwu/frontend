@@ -4,7 +4,7 @@ const PlayerContent = ({
   songs,
   setSongs,
   playSong,
-  updatePlayerState,
+  playerDispatch,
   audio,
   playerState,
   volume,
@@ -12,10 +12,8 @@ const PlayerContent = ({
 }) => {
   const pauseSong = () => {
     audio.pause();
-    updatePlayerState({
-      isPlaying: false,
-      songCurrentTime: audio.currentTime,
-    });
+    playerDispatch({ type: 'SET_PLAYING', payload: false });
+    playerDispatch({ type: 'SET_CURRENT_TIME', payload: audio.currentTime });
   };
 
   const VolumeIcon = ({ volume }) => {
