@@ -1,10 +1,7 @@
 import styles from "./styles.module.css";
-const Playlist = ({ songs, setSongs, playSong, currentSongId }) => {
-  const sortSongs = (songs) => {
-    return songs.sort((a, b) => a.title.localeCompare(b.title));
-  };
+const Playlist = ({ songs, playSong, currentSongId, deleteSong }) => {
 
-  const list = sortSongs(songs).map((song) => (
+  const list = songs.map((song) => (
     <li
       key={song.id}
       id={`song-${song.id}`}

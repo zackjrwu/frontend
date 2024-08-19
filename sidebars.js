@@ -46,6 +46,7 @@ const sidebars = {
         "reactThings/what-is-react",
         "reactThings/what-is-react-hook",
         "reactThings/causes-of-re-rendering",
+        "reactThings/music-player",
         {
           type: "category",
           label: "React Hooks",

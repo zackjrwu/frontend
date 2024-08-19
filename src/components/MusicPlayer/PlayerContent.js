@@ -9,9 +9,11 @@ const PlayerContent = ({
   audio,
   playerState,
   volume,
-  onVolumeChange,
+  onVolumeChange
 }) => {
   const pauseSong = () => {
+    if(songs.length === 0) return;
+    if(playerState.currentSong === null) return;
     audio.pause();
     playerDispatch({ type: 'SET_PLAYING', payload: false });
     playerDispatch({ type: 'SET_CURRENT_TIME', payload: audio.currentTime });
@@ -79,6 +81,7 @@ const PlayerContent = ({
           playSong={playSong}
           pauseSong={pauseSong}
           songs={songs}
+          setSongs={setSongs}
         />
         <VolumeControl volume={volume} onVolumeChange={onVolumeChange} />
       </div>
@@ -86,10 +89,11 @@ const PlayerContent = ({
   );
 };
 
-const PlayerButtons = ({ playerState, playSong, pauseSong, songs }) => {
+const PlayerButtons = ({ playerState, playSong, pauseSong, songs, setSongs }) => {
   const handlePlayIconClick = () => {
     if (playerState.isPlaying) return;
     if (playerState.currentSong === null) {
+      if(songs.length === 0) return;
       playSong(songs[0].id);
     } else {
       playSong(playerState.currentSong.id);
@@ -98,6 +102,7 @@ const PlayerButtons = ({ playerState, playSong, pauseSong, songs }) => {
 
   const handleNextButtonClick = () => {
     if (playerState.currentSong === null) {
+      if(songs.length === 0) return;
       playSong(songs[0].id);
       return;
     }
@@ -110,12 +115,24 @@ const PlayerButtons = ({ playerState, playSong, pauseSong, songs }) => {
 
   const handlePreviousButtonClick = () => {
     if (playerState.currentSong === null) return;
+    if(songs.length === 0) return;
     const currentSongIndex = songs.findIndex(
       (song) => song.id === playerState.currentSong.id
     );
     const previousSongIndex =
       (currentSongIndex - 1 + songs.length) % songs.length;
     playSong(songs[previousSongIndex].id);
+  };
+
+  const handleShuffleButtonClick = () => {
+    if(songs.length === 0) return;
+    const shuffledSongs = [...songs];
+    for (let i = shuffledSongs.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledSongs[i], shuffledSongs[j]] = [shuffledSongs[j], shuffledSongs[i]];
+    }
+    console.log(shuffledSongs);
+    setSongs(shuffledSongs);
   };
 
   return (
@@ -193,7 +210,7 @@ const PlayerButtons = ({ playerState, playSong, pauseSong, songs }) => {
           <rect x="18.5885" width="4.63633" height="18.5453" />
         </svg>
       </button>
-      <button id="shuffle" className={styles.shuffle} aria-label="Shuffle">
+      <button onClick={handleShuffleButtonClick} id="shuffle" className={styles.shuffle} aria-label="Shuffle">
         <svg
           width="17"
           height="14"
